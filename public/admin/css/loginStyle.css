@@ -1,0 +1,353 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 12px;
+}
+
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+blockquote,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+table,
+td,
+tr,
+th {
+  font-size: 12px;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  vertical-align: top;
+  border: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+.clear {
+  clear: both;
+}
+
+input[type="submit"],
+input[type="button"] {
+  cursor: pointer;
+}
+
+.f01 {
+  font-family: "微软雅黑";
+}
+
+.l {
+  float: left;
+}
+
+.r {
+  float: right;
+}
+
+body {
+  min-width: 1000px;
+}
+
+.weiruan {
+  font-family: "微软雅黑";
+}
+
+.k1 {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.tc {
+  text-align: center;
+}
+
+.d_ib {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+.header {
+  width: 100%;
+  height: 89px;
+  border-bottom: 1px solid #2b9fd0;
+}
+
+.hospitaltitle {
+  line-height: 120px;
+  float: left;
+  padding-left: 5px;
+  font-size: 20px;
+}
+
+.logo {
+  background: rgba(0, 0, 0, 0) url("../images/pic1.jpg") no-repeat scroll center bottom;
+  display: block;
+  width: 126px;
+  height: 56px;
+  padding-top: 18px;
+}
+
+.logo h1 {
+  font-size: 0;
+}
+
+.rightmain {
+  width: 774px;
+}
+
+.footer {
+  text-align: center;
+  font: 12px/94px "微软雅黑";
+  color: #666;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.flow {
+  padding: 40px 0;
+}
+
+
+
+
+
+.submit p {
+  text-align: right;
+}
+
+.submit em {
+  color: #ff682f;
+}
+
+.submit .p1 {
+  font: 14px/26px "微软雅黑";
+  color: #666;
+}
+
+.submit .p2 {
+  font: bold 24px/34px "微软雅黑";
+  color: #666;
+}
+
+.submitbut {
+  width: 100%;
+  background: #eeeeee;
+  height: 44px;
+  margin-top: 10px;
+}
+
+.submitbut input {
+  float: right;
+  width: 148px;
+  height: 44px;
+  background: #2b9fd0;
+  color: #fff;
+  font-size: 16px;
+  font-family: "微软雅黑";
+}
+
+.yzm {
+  color: #2B9FD0;
+}
+
+.changeimg {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.main_bg1 {
+  width: 100%;
+  height: 500px;
+}
+
+.main_bg2 {
+  background: url("../images/bg.jpg") no-repeat center;
+}
+
+.main_bg3 {
+  background: #f8f8f8;
+}
+
+.login {
+  background: #fff;
+  padding: 16px 34px 37px;
+  width: 308px;
+  margin-top: 66px;
+}
+
+.login .p1 {
+  font: 20px/71px "微软雅黑";
+  color: #2b9fd0;
+}
+
+.login .tex {
+  width: 272px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #eeeeee;
+  padding-left: 34px;
+  margin-bottom: 12px;
+  font-family: "微软雅黑";
+  font-size: 14px;
+  color: #666;
+}
+
+
+.login .tex3 {
+  width: 127px;
+  background: none;
+  text-align: center;
+  padding-left: 0;
+}
+
+.login .img1 {
+  padding-top: 8px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+.login .a1 {
+  font: 12px/42px "微软雅黑";
+  color: #2b9fd0;
+  *vertical-align: 13px;
+}
+
+.login .a1:hover {
+  text-decoration: underline;
+}
+
+.login .forgive {
+  font: 12px/40px "微软雅黑";
+  color: #333;
+}
+
+.login .forgive a {
+  color: #333;
+}
+
+.login .forgive a:hover {
+  color: #2b9fd0;
+}
+
+.login .forgive .che {
+  vertical-align: middle;
+  margin-top: -2px;
+  margin-right: 9px;
+}
+
+.login .but {
+  width: 308px;
+  height: 42px;
+  font-size: 16px;
+  color: #fff;
+  font-family: "微软雅黑";
+  background: #2b9fd0;
+  margin-top: 20px;
+}
+
+.login .hd {
+  border-bottom: 1px solid #eeeeee;
+  height: 72px;
+  margin-bottom: 20px;
+}
+
+.login .hd li {
+  font: 16px/71px "微软雅黑";
+  color: #2b9fd0;
+  float: left;
+  color: #666;
+  width: 50%;
+  text-indent: 10px;
+  cursor: pointer;
+}
+
+.login .hd li.on {
+  color: #2b9fd0;
+  border-bottom: 2px solid #2b9fd0;
+}
+
+.login .p2 {
+  padding-top: 20px;
+}
+
+.login .p2,
+.login .p2 a {
+  font: 12px/12px "微软雅黑";
+  color: #666;
+}
+
+.login .p2 a {
+  padding-right: 5px;
+}
+
+.login .p2 a:hover {
+  text-decoration: underline;
+  color: #2b9fd0;
+}
+
+.login .bd li {
+  display: none;
+}
