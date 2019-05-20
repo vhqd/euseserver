@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, '/public')));
 app.use('/admin', express.static(path.join(__dirname, '/views/index.html')));
 app.use('/index', express.static(path.join(__dirname, '/views/client.html')));
-app.use('/api', require('./routes/api'));
+app.use('/api', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
