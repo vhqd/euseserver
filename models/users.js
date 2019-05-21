@@ -4,20 +4,28 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    islock: Boolean
+    islock: Boolean,
+    isadmin: Boolean,
+    creatat: Number
 })
 
 const userModle = mongoose.model('user', userSchema)
 /* userModle.createIndexes() */
 
-const findLogin = (data)=>{
+const findLogin = (data) => {
     return userModle.findOne(data)
 }
 const userlist = () => {
     return userModle.find()
 }
 
+const deleteuser = (username) => {
+    console.log(username);
+    return userModle.deleteOne({ username })
+}
+
 module.exports = {
     findLogin,
-    userlist
+    userlist,
+    deleteuser
 }

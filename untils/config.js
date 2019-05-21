@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Mongoose = {
+const Mongoose = {
     url: 'mongodb://localhost:27017/euse',
     connect() {
         mongoose.connect(this.url, { useNewUrlParser: true }, (err) => {
