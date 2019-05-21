@@ -10,4 +10,6 @@ router.get('/login', userController.login);
 
 router.get('/logout', userController.logout);
 
+router.get('/users', userController.userlist)
+
 module.exports = router;
