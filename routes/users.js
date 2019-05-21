@@ -6,7 +6,7 @@ var router = express.Router();
 /* router.get('/', function(req, res, next) {
   res.send('users');
 }); */
-router.get('/login', userController.login);
+router.post('/login', userController.login);
 
 router.get('/logout', userController.logout);
 

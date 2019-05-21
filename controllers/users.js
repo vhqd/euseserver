@@ -1,20 +1,34 @@
-var userModel = require('../models/users')
+const userModel = require('../models/users')
+const { setCrypto } = require('../untils/base')
 
-var login = async (req, res, next) => {
-    res.send({
-        msg: '测试',
-        code: 200
-    })
+const login = async (req, res, next) => {
+
+    let { username, password } = req.body;
+    let user = await userModel.findLogin({
+        username,
+        password: setCrypto(password)
+    });
+    if (user) {
+        res.send({
+            msg: '登录成功',
+            code: 200
+        })
+    } else {
+        res.send({
+            msg: '登录失败',
+            code: -1
+        })
+    }
 }
 
-var logout = async (req, res, next) => {
+const logout = async (req, res, next) => {
     res.send({
         msg: '退出',
         code: 200
     })
 }
 
-var userlist = async (req, res, next) => {
+const userlist = async (req, res, next) => {
     let users = await userModel.userlist()
     if (users) {
         res.send({

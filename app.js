@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser')
 
 var { Mongoose } = require('./untils/config')
 
@@ -12,13 +13,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/public', express.static(path.join(__dirname, '/public')));
+app.use('/server/public', express.static(path.join(__dirname, '/public')));//静态资源托管
+app.use('/login',function (req, res, next) {
+  res.redirect('/admin#/login');
+});
+
 app.use('/admin', express.static(path.join(__dirname, '/views/index.html')));
 app.use('/index', express.static(path.join(__dirname, '/views/client.html')));
-app.use('/api', require('./routes/users'));
+
+app.use('/api/user', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

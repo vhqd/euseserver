@@ -1,19 +1,23 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 /* mongoose.set('useCreatIndex', true) */
 
-var userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     islock: Boolean
 })
 
-var userModle = mongoose.model('user', userSchema)
+const userModle = mongoose.model('user', userSchema)
 /* userModle.createIndexes() */
 
-var userlist = () => {
+const findLogin = (data)=>{
+    return userModle.findOne(data)
+}
+const userlist = () => {
     return userModle.find()
 }
 
 module.exports = {
+    findLogin,
     userlist
 }
