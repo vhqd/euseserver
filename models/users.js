@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     creatat: Number
 })
 
-const userModle = mongoose.model('user', userSchema)
+const userModle = mongoose.model('users', userSchema)
 /* userModle.createIndexes() */
 
 const findLogin = (data) => {
