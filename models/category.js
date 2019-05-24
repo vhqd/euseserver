@@ -3,18 +3,54 @@ const mongoose = require('mongoose');
 const categorySchema = new mongoose.Schema({
     categoryname: String,
     desc: String,
-    creatat: String,
+    creatat: {
+        type: Date,
+        default: Date.now
+    },
     parentId: String,
-    isparent: Boolean,
-    sort: Number
+    isparent: { type: Boolean, default: false },
+    parents: String,
+    parent:[],
+    children: String,
+    sort: { type: Number, default: 1 },
 })
 
 const categoryModel = mongoose.model("categorys", categorySchema);
 
+//获取栏目列表
 const categorylist = () => {
     return categoryModel.find();
 }
 
+//根据parentId获取栏目
+const getParent = (id) => {
+    return categoryModel.findOne({_id:id});
+}
+
+//添加栏目
+const addcategory = (data) => {
+    let cate = new categoryModel(data)
+    return cate.save(data).then(() => { return true }).catch(() => { return false })
+}
+
+//删除栏目
+const deletecategory = (ids) => {
+    console.log("ids==" + ids);
+    return categoryModel.deleteMany({ _id: { $in: ids } })
+}
+
+//更新编辑栏目
+const editcategory = (data) => {
+    return categoryModel.updateOne(
+        { _id: data._id },
+        { $set: { categoryname: data.categoryname, isparent: data.isparent, parentId: data.parentId, desc: data.desc, creatat: new Date() } }
+    )
+}
+
 module.exports = {
-    categorylist
+    categorylist,
+    deletecategory,
+    addcategory,
+    editcategory,
+    getParent
 }

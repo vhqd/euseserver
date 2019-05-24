@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
+var session = require('express-session');
+var token = require('./untils/token')
 
 var { Mongoose } = require('./untils/config')
 
@@ -22,15 +24,27 @@ app.all("*", function (req, res, next) {
   else next();
 });
 
+app.use( 
+  session({
+    secret:'euse.com',              //  用来对session_id相关的cookie进行签名
+    resave:false,                      
+    saveUninitialized: true,     
+    cookie: {userName:"default",maxAge: 7*24*60*60*1000}    // 设置有效期
+   })
+ )
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.set('view engine', 'jade');
+
 app.use('/server/public', express.static(path.join(__dirname, '/public')));//静态资源托管
 app.use('/login', function (req, res, next) {
-  res.redirect('/admin#/login');
+  res.redirect('/admin#/login/');
 });
 
 app.use('/admin', express.static(path.join(__dirname, '/views/index.html')));
@@ -38,9 +52,22 @@ app.use('/index', express.static(path.join(__dirname, '/views/client.html')));
 
 app.use('/api/user', require('./routes/users'));
 app.use('/api/category', require('./routes/category'));
+app.use('/api/article', require('./routes/article'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
+});
+
+
+ //登录拦截器
+ app.use(function (req, res, next) {
+  var url = req.originalUrl;
+  console.log('=============token');
+  console.log(session.token);
+  if (url != "/login" && !req.session.token) {
+      return res.redirect("/login");
+  }
+  next();
 });
 
 Mongoose.connect();
