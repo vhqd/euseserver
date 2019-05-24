@@ -14,6 +14,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
+
+
 //设置跨域访问
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", " * ");
@@ -24,14 +26,14 @@ app.all("*", function (req, res, next) {
   else next();
 });
 
-app.use( 
+app.use(
   session({
-    secret:'euse.com',              //  用来对session_id相关的cookie进行签名
-    resave:false,                      
-    saveUninitialized: true,     
-    cookie: {userName:"default",maxAge: 7*24*60*60*1000}    // 设置有效期
-   })
- )
+    secret: 'euse.vip',              //  用来对session_id相关的cookie进行签名
+    resave: false,
+    saveUninitialized: true,
+    cookie: { userName: "default", maxAge: 7 * 24 * 60 * 60 * 1000 }    // 设置有效期
+  })
+)
 
 
 app.use(logger('dev'));
@@ -59,13 +61,13 @@ app.use(function (req, res, next) {
 });
 
 
- //登录拦截器
- app.use(function (req, res, next) {
+//登录拦截器
+app.use(function (req, res, next) {
   var url = req.originalUrl;
   console.log('=============token');
-  console.log(session.token);
-  if (url != "/login" && !req.session.token) {
-      return res.redirect("/login");
+  console.log(req.get("Authorization"));
+  if (token.checkToken(req.get("Authorization").split(' ')[1]) && url != '/login') {
+    return res.redirect("/login");
   }
   next();
 });
