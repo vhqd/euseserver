@@ -11,6 +11,9 @@ router.post('/addarticle',articleController.addarticle);
 //编辑文章
 router.post('/editarticle',articleController.editarticle);
 
+//获取最近更新文章
+router.post('/newarticle',articleController.newarticle);
+
 //删除文章
 router.post('/deletearticle',articleController.deletearticle);
 

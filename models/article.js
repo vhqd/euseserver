@@ -27,6 +27,46 @@ const articlelist = (data, res) => {
     // return articleModel.find();
 }
 
+//获取最新文章
+const newarticle = (data, res) => {
+    let pageSize = parseInt(data.pageSize) || 12;
+    let currentPage = parseInt(data.currentPage) || 1;
+    let totalPage;
+    articleModel.count({}, (err, count) => {
+        totalPage = count
+    });
+    if (pageSize * currentPage > totalPage) {
+
+    }
+    articleModel.find()
+        .skip(pageSize * (currentPage - 1))
+        .limit(pageSize)
+        .sort({ 'creatat': -1 })
+        .exec(function (err, docs) {
+            if (err) {
+                res.send({
+                    msg: '获取文章失败',
+                    code: -1
+                })
+                return false
+            }
+            res.send({
+                msg: '获取文章成功',
+                code: 200,
+                data: {
+                    articles: docs
+                },
+                page: {
+                    pageSize: pageSize,
+                    currentPage: currentPage,
+                    totalPage: totalPage
+                }
+            })
+            return true
+
+        });
+}
+
 //添加文章
 const addarticle = (data) => {
     console.log('====================================================');
@@ -55,14 +95,14 @@ const editarticles = (data) => {
     console.log('====================================================');
 
     return articleModel.updateOne({ _id: data._id }, { $set: { title: data.title, parentId: data.parentId, desc: data.desc, content: data.content, creatat: new Date() } })
-   /*  return articleModel.findOne({ _id: data._id }, function (err, doc) {
-        doc.set({ title: data.title });
-        doc.set({ parentId: data.parentId });
-        doc.set({ desc: data.desc });
-        doc.set({ content: data.content });
-        doc.set({ creatat: new Date() });
-        doc.save();
-    }); */
+    /*  return articleModel.findOne({ _id: data._id }, function (err, doc) {
+         doc.set({ title: data.title });
+         doc.set({ parentId: data.parentId });
+         doc.set({ desc: data.desc });
+         doc.set({ content: data.content });
+         doc.set({ creatat: new Date() });
+         doc.save();
+     }); */
 }
 
 //获取分页栏目
@@ -107,5 +147,6 @@ module.exports = {
     articlelist,
     addarticle,
     editarticles,
-    deletarticle
+    deletarticle,
+    newarticle
 }

@@ -12,7 +12,7 @@ var { Mongoose } = require('./untils/config')
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, './views'));
 
 
 
@@ -44,13 +44,13 @@ app.use(cookieParser());
 
 app.set('view engine', 'jade');
 
-app.use('/server/public', express.static(path.join(__dirname, '/public')));//静态资源托管
+app.use('/server/public', express.static(path.join(__dirname, './public')));//静态资源托管
 app.use('/login', function (req, res, next) {
   res.redirect('/admin#/login/');
 });
 
-app.use('/admin', express.static(path.join(__dirname, '/views/index.html')));
-app.use('/index', express.static(path.join(__dirname, '/views/client.html')));
+app.use('/admin', express.static(path.join(__dirname, './views/index.html')));
+app.use('/index', express.static(path.join(__dirname, './views/client.html')));
 
 app.use('/api/user', require('./routes/users'));
 app.use('/api/category', require('./routes/category'));

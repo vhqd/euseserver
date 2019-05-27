@@ -4,13 +4,13 @@ const categoryModel = require('../models/category')
 const category = async (req, res, next) => {
     let categorys = await categoryModel.categorylist();
     /* console.log("所有栏目"+categorys); */
-    
+
     if (categorys) {
         let newdata = await initCategory(categorys);
         let newdata1 = await initCategory(categorys);
 
-        for(let i =0 ; i < newdata1.length ; i++){
-            if(newdata1[i].parentId){
+        for (let i = 0; i < newdata1.length; i++) {
+            if (newdata1[i].parentId) {
                 let parentId = newdata1[i].parentId;
                 let parent = await categoryModel.getParent(parentId);
                 newdata1[i].parent = parent;
@@ -27,6 +27,24 @@ const category = async (req, res, next) => {
     } else {
         res.send({
             msg: '获取栏目失败',
+            code: -1
+        })
+    }
+}
+
+const getlevel = async (req, res, mext) => {
+    let categorys = await categoryModel.getLevel(2);
+    if (categorys) {
+        res.send({
+            msg: '获取栏目成功',
+            code: 200,
+            data: {
+                category:categorys
+            }
+        })
+    } else {
+        res.send({
+            msg: '添加栏目失败',
             code: -1
         })
     }
@@ -111,5 +129,6 @@ module.exports = {
     category,
     deletecategory,
     addcategory,
-    editcategory
+    editcategory,
+    getlevel
 }

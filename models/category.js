@@ -10,7 +10,8 @@ const categorySchema = new mongoose.Schema({
     parentId: String,
     isparent: { type: Boolean, default: false },
     parents: String,
-    parent:[],
+    parent: [],
+    level:Number,
     children: String,
     sort: { type: Number, default: 1 },
 })
@@ -22,9 +23,19 @@ const categorylist = () => {
     return categoryModel.find();
 }
 
+//获取顶级栏目
+const getParents = () => {
+    return categoryModel.find({ isparent: true })
+}
+
+//获取二级栏目
+const getLevel = (level)=>{
+    return categoryModel.find({ level: level })
+}
+
 //根据parentId获取栏目
 const getParent = (id) => {
-    return categoryModel.findOne({_id:id});
+    return categoryModel.findOne({ _id: id });
 }
 
 //添加栏目
@@ -52,5 +63,7 @@ module.exports = {
     deletecategory,
     addcategory,
     editcategory,
-    getParent
+    getParent,
+    getParents,
+    getLevel
 }

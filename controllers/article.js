@@ -24,6 +24,12 @@ const editarticle = async (req, res, next) => {
     }
 } 
 
+const newarticle = (req,res,next)=>{
+    let datas = req.body;
+    console.log(datas);
+    articleModel.newarticle(datas,res);
+}
+
 //删除文章
 const deletearticle = async (req, res, next) => {
     let datas = req.body;
@@ -67,5 +73,6 @@ module.exports = {
     articlelist,
     addarticle,
     editarticle,
-    deletearticle
+    deletearticle,
+    newarticle
 }
