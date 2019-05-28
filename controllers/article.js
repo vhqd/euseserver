@@ -30,6 +30,26 @@ const newarticle = (req,res,next)=>{
     articleModel.newarticle(datas,res);
 }
 
+//通过id获取文章
+const getonearticle = async (req, res, next) => {
+    let datas = req.body;
+    let article = await articleModel.getonearticle(datas);
+    if (article) {
+        res.send({
+            msg: '获取文章成功',
+            code: 200,
+            data:{
+                article:article
+            }
+        })
+    } else {
+        res.send({
+            msg: '获取文章失败',
+            code: -1
+        })
+    }
+}
+
 //删除文章
 const deletearticle = async (req, res, next) => {
     let datas = req.body;
@@ -74,5 +94,6 @@ module.exports = {
     addarticle,
     editarticle,
     deletearticle,
-    newarticle
+    newarticle,
+    getonearticle
 }

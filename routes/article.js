@@ -17,4 +17,8 @@ router.post('/newarticle',articleController.newarticle);
 //删除文章
 router.post('/deletearticle',articleController.deletearticle);
 
+
+//通过id获取文章
+router.post('/getonearticle',articleController.getonearticle);
+
 module.exports = router;

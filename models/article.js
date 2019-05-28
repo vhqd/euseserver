@@ -78,6 +78,14 @@ const addarticle = (data) => {
     return article.save(data).then(() => { return true }).catch(() => { return false })
 }
 
+const getonearticle = (data) =>{
+    console.log('=============================');
+    
+    console.log(data);
+    
+    return articleModel.findById({ _id:data.id });
+}
+
 //删除文章
 const deletarticle = (ids) => {
     console.log("ids=" + ids);
@@ -148,5 +156,6 @@ module.exports = {
     addarticle,
     editarticles,
     deletarticle,
-    newarticle
+    newarticle,
+    getonearticle
 }
