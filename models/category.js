@@ -33,6 +33,10 @@ const getLevel = (level)=>{
     return categoryModel.find({ level: level })
 }
 
+const getcate = (data)=>{
+    return categoryModel.find({ parentId: data.id })
+}
+
 //根据parentId获取栏目
 const getParent = (id) => {
     return categoryModel.findOne({ _id: id });
@@ -65,5 +69,6 @@ module.exports = {
     editcategory,
     getParent,
     getParents,
-    getLevel
+    getLevel,
+    getcate
 }

@@ -17,4 +17,7 @@ router.post('/editcategory', categoryController.editcategory);
 //获取所有课程栏目
 router.get('/getlevel', categoryController.getlevel);
 
+//获取所有课程栏目
+router.post('/getcate', categoryController.getcate);
+
 module.exports = router;
