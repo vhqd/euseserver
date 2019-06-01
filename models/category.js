@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const categorySchema = new mongoose.Schema({
     categoryname: String,
@@ -7,16 +8,35 @@ const categorySchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    parentId: String,
+    parentId: {
+        type: Schema.Types.ObjectId
+    },
     isparent: { type: Boolean, default: false },
     parents: String,
     parent: [],
-    level:Number,
+    level: Number,
     children: String,
     sort: { type: Number, default: 1 },
 })
 
+
 const categoryModel = mongoose.model("categorys", categorySchema);
+
+const test = (data) => {
+    return categoryModel.aggregate([
+        {
+            $lookup: {
+                from: 'articles',
+                localField: '_id',
+                foreignField: 'parentId',
+                as: 'child'
+            }
+        },
+        {
+            $match: {parentId: mongoose.Types.ObjectId(data.id) }
+        }
+    ])
+}
 
 //获取栏目列表
 const categorylist = () => {
@@ -29,11 +49,11 @@ const getParents = () => {
 }
 
 //获取二级栏目
-const getLevel = (level)=>{
+const getLevel = (level) => {
     return categoryModel.find({ level: level })
 }
 
-const getcate = (data)=>{
+const getcate = (data) => {
     return categoryModel.find({ parentId: data.id })
 }
 
@@ -70,5 +90,6 @@ module.exports = {
     getParent,
     getParents,
     getLevel,
-    getcate
+    getcate,
+    test
 }

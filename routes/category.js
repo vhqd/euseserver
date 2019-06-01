@@ -20,4 +20,7 @@ router.get('/getlevel', categoryController.getlevel);
 //获取所有课程栏目
 router.post('/getcate', categoryController.getcate);
 
+
+//获取所有课程栏目
+router.post('/test', categoryController.test);
 module.exports = router;

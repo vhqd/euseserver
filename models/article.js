@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const articleSchema = new mongoose.Schema({
     title: String,
@@ -7,7 +8,9 @@ const articleSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    parentId: String,
+    parentId: {
+        type:Schema.Types.ObjectId
+    },
     content: String
 })
 
@@ -78,12 +81,12 @@ const addarticle = (data) => {
     return article.save(data).then(() => { return true }).catch(() => { return false })
 }
 
-const getonearticle = (data) =>{
+const getonearticle = (data) => {
     console.log('=============================');
-    
+
     console.log(data);
-    
-    return articleModel.findById({ _id:data.id });
+
+    return articleModel.findById({ _id: data.id });
 }
 
 //删除文章
@@ -152,6 +155,7 @@ function getonecategory(_id, pageSize, currentPage, res) {
 }
 
 module.exports = {
+    articleModel,
     articlelist,
     addarticle,
     editarticles,

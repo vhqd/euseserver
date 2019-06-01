@@ -1,4 +1,21 @@
 const categoryModel = require('../models/category')
+const test = async (req, res, next) => {
+    let data = req.body
+    
+    let a = await categoryModel.test(data)
+    console.log('88888888888888888888');
+    
+    console.log(a);
+    if (a) {
+        
+        
+    } else {
+        res.send({
+            msg: '获取失败',
+            code: -1
+        })
+    }
+}
 
 //获取所有栏目
 const category = async (req, res, next) => {
@@ -150,5 +167,6 @@ module.exports = {
     addcategory,
     editcategory,
     getlevel,
-    getcate
+    getcate,
+    test
 }
