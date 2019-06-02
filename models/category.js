@@ -22,14 +22,14 @@ const categorySchema = new mongoose.Schema({
 
 const categoryModel = mongoose.model("categorys", categorySchema);
 
-const test = (data) => {
+const getShowCate = (data) => {
     return categoryModel.aggregate([
         {
             $lookup: {
                 from: 'articles',
                 localField: '_id',
                 foreignField: 'parentId',
-                as: 'child'
+                as: 'subMenu'
             }
         },
         {
@@ -38,7 +38,7 @@ const test = (data) => {
     ])
 }
 
-//获取栏目列表
+//获取所有栏目列表
 const categorylist = () => {
     return categoryModel.find();
 }
@@ -53,6 +53,7 @@ const getLevel = (level) => {
     return categoryModel.find({ level: level })
 }
 
+//根据父级id获取栏目
 const getcate = (data) => {
     return categoryModel.find({ parentId: data.id })
 }
@@ -91,5 +92,5 @@ module.exports = {
     getParents,
     getLevel,
     getcate,
-    test
+    getShowCate
 }

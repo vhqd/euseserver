@@ -20,7 +20,7 @@ router.get('/getlevel', categoryController.getlevel);
 //获取所有课程栏目
 router.post('/getcate', categoryController.getcate);
 
+//获取单个栏目树状导航
+router.post('/getshowcate', categoryController.getShowCate);
 
-//获取所有课程栏目
-router.post('/test', categoryController.test);
 module.exports = router;

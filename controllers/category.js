@@ -1,14 +1,17 @@
 const categoryModel = require('../models/category')
-const test = async (req, res, next) => {
+
+//获取
+const getShowCate = async (req, res, next) => {
     let data = req.body
-    
-    let a = await categoryModel.test(data)
-    console.log('88888888888888888888');
-    
-    console.log(a);
-    if (a) {
-        
-        
+    let cate = await categoryModel.getShowCate(data)
+    if (cate) {
+        res.send({
+            msg: '获取成功',
+            code: 200,
+            data:{
+                category:cate
+            }
+        })
     } else {
         res.send({
             msg: '获取失败',
@@ -21,9 +24,8 @@ const test = async (req, res, next) => {
 const category = async (req, res, next) => {
     let categorys = await categoryModel.categorylist();
     /* console.log("所有栏目"+categorys); */
-
     if (categorys) {
-        let newdata = await initCategory(categorys);
+       /*  let newdata = await initCategory(categorys);
         let newdata1 = await initCategory(categorys);
 
         for (let i = 0; i < newdata1.length; i++) {
@@ -40,7 +42,7 @@ const category = async (req, res, next) => {
             data: {
                 category: newdata1
             }
-        })
+        }) */
     } else {
         res.send({
             msg: '获取栏目失败',
@@ -168,5 +170,5 @@ module.exports = {
     editcategory,
     getlevel,
     getcate,
-    test
+    getShowCate
 }
