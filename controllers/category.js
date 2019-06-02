@@ -1,9 +1,38 @@
 const categoryModel = require('../models/category')
 
-//获取
+//根据顶级栏目获取子栏目和文章
 const getShowCate = async (req, res, next) => {
     let data = req.body
     let cate = await categoryModel.getShowCate(data)
+    if (cate) {
+        res.send({
+            msg: '获取成功',
+            code: 200,
+            data:{
+                category:cate
+            }
+        })
+    } else {
+        res.send({
+            msg: '获取失败',
+            code: -1
+        })
+    }
+}
+
+//返回所有栏目列表
+const getCateAll= async (req, res, next) => {
+    let cate = await categoryModel.getCateAll();
+    for(let i = 0 ; i < cate.length ; i++){
+        if(cate[i].children.length > 0){
+           let children = cate[i].children;
+           for(let j = 0 ; j < children.length ; j++){
+                let id = children[j]['_id'];
+                let childdata = await categoryModel.getcate({id:id});
+                children[j]['children'] = childdata;
+           }
+        }
+    }
     if (cate) {
         res.send({
             msg: '获取成功',
@@ -25,7 +54,7 @@ const category = async (req, res, next) => {
     let categorys = await categoryModel.categorylist();
     /* console.log("所有栏目"+categorys); */
     if (categorys) {
-       /*  let newdata = await initCategory(categorys);
+        let newdata = await initCategory(categorys);
         let newdata1 = await initCategory(categorys);
 
         for (let i = 0; i < newdata1.length; i++) {
@@ -42,7 +71,7 @@ const category = async (req, res, next) => {
             data: {
                 category: newdata1
             }
-        }) */
+        })
     } else {
         res.send({
             msg: '获取栏目失败',
@@ -164,6 +193,7 @@ function initCategory(datas) {
 }
 
 module.exports = {
+    getCateAll,
     category,
     deletecategory,
     addcategory,

@@ -9,7 +9,7 @@ const categorySchema = new mongoose.Schema({
         default: Date.now
     },
     parentId: {
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
     },
     isparent: { type: Boolean, default: false },
     parents: String,
@@ -34,6 +34,23 @@ const getShowCate = (data) => {
         },
         {
             $match: {parentId: mongoose.Types.ObjectId(data.id) }
+        }
+    ])
+}
+
+
+const getCateAll = () => {
+    return categoryModel.aggregate([
+        {
+            $lookup: {
+                from: 'categorys',
+                localField: '_id',
+                foreignField: 'parentId',
+                as: 'children'
+            }
+        },
+        {
+            $match: {isparent: true }
         }
     ])
 }
@@ -84,6 +101,7 @@ const editcategory = (data) => {
 }
 
 module.exports = {
+    getCateAll,
     categorylist,
     deletecategory,
     addcategory,

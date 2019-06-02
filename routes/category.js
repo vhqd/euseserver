@@ -5,6 +5,9 @@ var router = express.Router();
 //获取所有栏目
 router.get('/category', categoryController.category);
 
+//获取所有顶级栏目
+router.get('/getcateall', categoryController.getCateAll);
+
 //添加栏目
 router.post('/addcategory', categoryController.addcategory);
 
