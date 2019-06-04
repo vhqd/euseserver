@@ -142,8 +142,9 @@ body {
 }
 
 .logo {
-  background: rgba(0, 0, 0, 0) url("../images/pic1.jpg") no-repeat scroll center bottom;
+  background: rgba(0, 0, 0, 0) url("../images/logo.png") no-repeat scroll center bottom;
   display: block;
+  background-size: 100%;
   width: 126px;
   height: 56px;
   padding-top: 18px;

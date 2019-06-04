@@ -49,8 +49,10 @@ app.use('/login', function (req, res, next) {
   res.redirect('/admin#/login/');
 });
 
+
+app.use('/index',express.static(path.join(__dirname, './views/client.html')));
 app.use('/admin', express.static(path.join(__dirname, './views/index.html')));
-app.use('/index', express.static(path.join(__dirname, './views/client.html')));
+/* app.use('/index', express.static(path.join(__dirname, './views/client.html'))); */
 
 app.use('/api/user', require('./routes/users'));
 app.use('/api/category', require('./routes/category'));

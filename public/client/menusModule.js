@@ -169,6 +169,7 @@ const state = {
 const mutations = {
     findParents(state, payload) {
         let menu = payload.menu;
+        
         if (menu.type === "button") {
             menu.isExpanded = !menu.isExpanded;
         } else if (menu.type === "link") {
