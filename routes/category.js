@@ -26,4 +26,8 @@ router.post('/getcate', categoryController.getcate);
 //获取单个栏目树状导航
 router.post('/getshowcate', categoryController.getShowCate);
 
+//获取二级栏目和三级栏目树
+router.get('/getlevelthree', categoryController.getLevelThree);
+
+
 module.exports = router;

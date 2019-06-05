@@ -99,7 +99,7 @@ const getcate = async (req, res, next) => {
     }
 }
 
-const getlevel = async (req, res, mext) => {
+const getlevel = async (req, res, next) => {
     let categorys = await categoryModel.getLevel(2);
     if (categorys) {
         res.send({
@@ -111,7 +111,25 @@ const getlevel = async (req, res, mext) => {
         })
     } else {
         res.send({
-            msg: '添加栏目失败',
+            msg: '获取栏目失败',
+            code: -1
+        })
+    }
+}
+
+const getLevelThree = async (req, res, next) => {
+    let categorys = await categoryModel.getLevelThree(2);
+    if (categorys) {
+        res.send({
+            msg: '获取栏目成功',
+            code: 200,
+            data: {
+                category: categorys
+            }
+        })
+    } else {
+        res.send({
+            msg: '获取栏目失败',
             code: -1
         })
     }
@@ -200,5 +218,6 @@ module.exports = {
     editcategory,
     getlevel,
     getcate,
-    getShowCate
+    getShowCate,
+    getLevelThree
 }

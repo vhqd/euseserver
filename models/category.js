@@ -38,7 +38,7 @@ const getShowCate = (data) => {
     ])
 }
 
-
+//获取三级栏目和文章树
 const getCateAll = () => {
     return categoryModel.aggregate([
         {
@@ -51,6 +51,23 @@ const getCateAll = () => {
         },
         {
             $match: {isparent: true }
+        }
+    ])
+}
+
+//获取二级栏目和三级栏目树
+const getLevelThree = (level) => {
+    return categoryModel.aggregate([
+        {
+            $lookup: {
+                from: 'categorys',
+                localField: '_id',
+                foreignField: 'parentId',
+                as: 'children'
+            }
+        },
+        {
+            $match: {level: level }
         }
     ])
 }
@@ -110,5 +127,6 @@ module.exports = {
     getParents,
     getLevel,
     getcate,
-    getShowCate
+    getShowCate,
+    getLevelThree
 }
