@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const upload = "http://127.0.0.1:3000/server/";
 const articleSchema = new mongoose.Schema({
     title: String,
     desc: String,
@@ -11,6 +11,7 @@ const articleSchema = new mongoose.Schema({
     parentId: {
         type:Schema.Types.ObjectId
     },
+    imgurl:String,
     content: String
 })
 
@@ -62,7 +63,7 @@ const newarticle = (data, res) => {
                 page: {
                     pageSize: pageSize,
                     currentPage: currentPage,
-                    totalPage: totalPage
+                    totalSize: totalPage
                 }
             })
             return true
@@ -77,6 +78,7 @@ const addarticle = (data) => {
     console.log(data);
 
     console.log('====================================================');
+    data.imgurl = upload+data.imgurl
     let article = new articleModel(data);
     return article.save(data).then(() => { return true }).catch(() => { return false })
 }
@@ -105,7 +107,7 @@ const editarticles = (data) => {
 
     console.log('====================================================');
 
-    return articleModel.updateOne({ _id: data._id }, { $set: { title: data.title, parentId: data.parentId, desc: data.desc, content: data.content, creatat: new Date() } })
+    return articleModel.updateOne({ _id: data._id }, { $set: { title: data.title, parentId: data.parentId, desc: data.desc, content: data.content,imgurl: upload+data.imgurl, creatat: new Date() } })
     /*  return articleModel.findOne({ _id: data._id }, function (err, doc) {
          doc.set({ title: data.title });
          doc.set({ parentId: data.parentId });

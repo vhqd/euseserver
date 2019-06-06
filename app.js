@@ -11,6 +11,8 @@ var { Mongoose } = require('./untils/config')
 
 var app = express();
 
+
+
 // view engine setup
 app.set('views', path.join(__dirname, './views'));
 
@@ -57,6 +59,8 @@ app.use('/admin', express.static(path.join(__dirname, './views/index.html')));
 app.use('/api/user', require('./routes/users'));
 app.use('/api/category', require('./routes/category'));
 app.use('/api/article', require('./routes/article'));
+app.use('/api/upload', require('./routes/upload'));
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

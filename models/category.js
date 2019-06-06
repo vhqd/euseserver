@@ -84,7 +84,7 @@ const getParents = () => {
 
 //获取二级栏目
 const getLevel = (level) => {
-    return categoryModel.find({ level: level })
+    return categoryModel.find({ level: level }).limit(5)
 }
 
 //根据父级id获取栏目
