@@ -38,7 +38,7 @@ const getShowCate = (data) => {
     ])
 }
 
-//获取三级栏目和文章树
+//获取顶级栏目和二级栏目
 const getCateAll = () => {
     return categoryModel.aggregate([
         {
@@ -54,6 +54,7 @@ const getCateAll = () => {
         }
     ])
 }
+
 
 //获取二级栏目和三级栏目树
 const getLevelThree = (level) => {

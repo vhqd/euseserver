@@ -117,6 +117,24 @@ const getlevel = async (req, res, next) => {
     }
 }
 
+const getLevelTwo = async (req, res, next) => {
+    let categorys = await categoryModel.getCateAll();
+    if (categorys) {
+        res.send({
+            msg: '获取栏目成功',
+            code: 200,
+            data: {
+                category: categorys
+            }
+        })
+    } else {
+        res.send({
+            msg: '获取栏目失败',
+            code: -1
+        })
+    }
+}
+
 const getLevelThree = async (req, res, next) => {
     let categorys = await categoryModel.getLevelThree(2);
     if (categorys) {
@@ -219,5 +237,6 @@ module.exports = {
     getlevel,
     getcate,
     getShowCate,
+    getLevelTwo,
     getLevelThree
 }
