@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const upload = "http://127.0.0.1:3000/server/";
 const categorySchema = new mongoose.Schema({
     categoryname: String,
     desc: String,
@@ -15,6 +15,7 @@ const categorySchema = new mongoose.Schema({
     parents: String,
     parent: [],
     level: Number,
+    imgurl:String,
     children: String,
     sort: { type: Number, default: 1 },
 })
@@ -100,6 +101,7 @@ const getParent = (id) => {
 
 //添加栏目
 const addcategory = (data) => {
+    data.imgurl = upload+data.imgurl
     let cate = new categoryModel(data)
     return cate.save(data).then(() => { return true }).catch(() => { return false })
 }
@@ -112,9 +114,10 @@ const deletecategory = (ids) => {
 
 //更新编辑栏目
 const editcategory = (data) => {
+    data.imgurl = upload+data.imgurl
     return categoryModel.updateOne(
         { _id: data._id },
-        { $set: { categoryname: data.categoryname, isparent: data.isparent, parentId: data.parentId, desc: data.desc, creatat: new Date() } }
+        { $set: { categoryname: data.categoryname, isparent: data.isparent, parentId: data.parentId, desc: data.desc,imgurl: data.imgurl, creatat: new Date() } }
     )
 }
 
